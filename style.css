@@ -1,0 +1,31 @@
+:root {
+  --main: #00ff91;
+  --primary: rgba(0, 162, 255, 0.541);
+  --secondary: rgba(77, 255, 0, 0.529);
+}
+
+body {
+  background: black;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.box {
+  display: flex;
+  justify-self: center;
+}
+
+.result {
+  background-color: var(--primary);
+  width: 4rem;
+  height: 3rem;
+  border-radius: 5.3px;
+}
+
+.percentage {
+  background-color: var(--secondary);
+  text-align: center;
+  padding: 0.9rem;
+  border-radius: 5.3px;
+}
