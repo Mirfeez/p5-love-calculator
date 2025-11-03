@@ -68,3 +68,13 @@
 
     // Load results when page loads
     loadResults();
+
+// Clear All Results button
+document.getElementById("clearAll").addEventListener("click", () => {
+  if (confirm("Are you sure you want to delete ALL results?")) {
+    localStorage.removeItem("loveCalculatorResults");
+    allResults = [];
+    displayResults(allResults);
+  }
+});
+
