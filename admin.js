@@ -4,8 +4,11 @@ let allResults = [];
 // Load and display results from Firestore
 async function loadResults() {
   try {
-    const snapshot = await db.collection("results").orderBy("timestamp", "desc").get();
-    allResults = snapshot.docs.map(doc => {
+    const snapshot = await db
+      .collection("results")
+      .orderBy("timestamp", "desc")
+      .get();
+    allResults = snapshot.docs.map((doc) => {
       return {
         id: doc.id,
         ...doc.data(),
@@ -55,7 +58,6 @@ function displayResults(results) {
 
 // Load results when page loads
 loadResults();
-
 
 // Search functionality
 document.querySelector(".search-box").addEventListener("input", (e) => {
