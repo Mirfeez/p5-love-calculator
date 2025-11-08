@@ -50,6 +50,21 @@
   <p class="quote-note">This tool is only for fun. If the result isn't what you hoped, don't be sad — real love is built
     by care and respect, not a number.</p>
 
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+  <script>
+    // PASTE YOUR FIREBASE CONFIGURATION HERE
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      projectId: "YOUR_PROJECT_ID",
+      // ... and the rest of your config keys
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
 </body>
 
 </html>

@@ -33,22 +33,20 @@ function nextRound(numbers) {
   return combinedStr.split("").map((d) => parseInt(d, 10));
 }
 
-function saveResult(name1, name2, score) {
-  // Get existing results
-  const results = JSON.parse(
-    localStorage.getItem("loveCalculatorResults") || "[]"
-  );
-
-  // Add new result
-  results.push({
+async function saveResult(name1, name2, score) {
+  const newResult = {
     name1: name1.trim(),
     name2: name2.trim(),
     score: score,
     timestamp: new Date().toISOString(),
-  });
+  };
 
-  // Save back to localStorage
-  localStorage.setItem("loveCalculatorResults", JSON.stringify(results));
+  try {
+    // Save to the "results" collection in Firestore
+    await db.collection("results").add(newResult);
+  } catch (error) {
+    console.error("Error writing document: ", error);
+  }
 }
 
 function loveCalculator(name1, name2) {
