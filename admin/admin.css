@@ -282,3 +282,10 @@ button:hover {
 #adminContent{
   display: none;
 }
+
+.chart-container {
+  background: #111;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 25px 0;
+}

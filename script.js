@@ -1,18 +1,4 @@
-// DOM wiring
 document.addEventListener("DOMContentLoaded", () => {
-  // Ensure Firebase is initialized before using it.
-  // The 'db' variable is expected to be initialized in the HTML script tag.
-  if (
-    typeof firebase === "undefined" ||
-    typeof firebase.firestore === "undefined"
-  ) {
-    console.error(
-      "Firebase is not initialized. Please check your Firebase configuration in index.html."
-    );
-    // Disable functionality if Firebase is not available.
-    document.querySelector(".btnDiv button").disabled = true;
-    return;
-  }
   const db = firebase.firestore();
 
   const hisInput = document.getElementById("hisName");
@@ -67,22 +53,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function saveResult(name1, name2, score) {
-    const newResult = {
-      name1: name1.trim(),
-      name2: name2.trim(),
-      score: score,
-      timestamp: new Date().toISOString(),
-    };
-
     try {
-      await db.collection("results").add(newResult);
-      console.log("Result saved successfully.");
+      await db.collection("results").add({
+        name1,
+        name2,
+        score,
+        timestamp: new Date()
+      });
+      console.log("Saved ✅");
     } catch (error) {
-      console.error("Error writing document to Firestore: ", error);
-      // Optionally, inform the user that the result could not be saved.
-      alert(
-        "Could not save the result. Please check your connection and Firebase setup."
-      );
+      console.error("Error Saving:", error);
     }
   }
 
@@ -90,31 +70,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const his = hisInput.value.trim();
     const her = herInput.value.trim();
 
-    if (!his && !her) {
-      resultText.textContent = "Please enter both names.";
+    if (!his || !her) {
+      resultText.textContent = "Enter both names 💬";
       resultBox.textContent = "";
       return;
     }
 
     const score = loveCalculator(his, her);
-    resultText.textContent = `${his || "..."} ❤️ ${her || "..."}`;
-    resultBox.textContent = String(score);
+    resultText.textContent = `${his} ❤️ ${her}`;
+    resultBox.textContent = score;
 
-    // Save result to Firestore
     saveResult(his, her, score);
   }
 
-  button.addEventListener("click", () => {
-    calculateAndShowResult();
-  });
-
-  // Allow pressing Enter in either input to trigger calculation
-  [hisInput, herInput].forEach((inp) => {
-    inp.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault(); // Prevent form submission
-        calculateAndShowResult();
-      }
-    });
-  });
+  button.addEventListener("click", calculateAndShowResult);
 });
