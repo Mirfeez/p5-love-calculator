@@ -349,9 +349,10 @@ button:hover::after {
 /* Responsive tweaks */
 @media (max-width: 600px) {
   section {
-    width: calc(100vw - 2rem);
-    padding: 1.25rem 1rem 4.5rem;
-    min-height: auto;
+    width: auto; /* Let the element fill the available space */
+    margin: 3.5rem 1rem; /* Control spacing with margin */
+    padding: 1.25rem 1rem 2.5rem; /* Adjusted bottom padding */
+    min-height: 0; /* Use 0 for better compatibility with very old browsers */
   }
 
   .gender {
