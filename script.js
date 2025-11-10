@@ -7,17 +7,17 @@ function calculateLove() {
     return;
   }
 
-  // Your love score calculation
+  // Your love score calculation (you can adjust formula later)
   let score = Math.floor(Math.random() * 100) + 1;
 
-  // Show result on screen
+  // Display result on page
   document.getElementById("result").innerText = `${score}% ❤️`;
 
-  // ✅ Save to Google Sheet
+  // ✅ Send the data to Google Sheets
   sendData(name1, name2, score);
 }
 
-// ✅ FUNCTION THAT SENDS DATA TO GOOGLE SHEET
+// ✅ Function to send results to Google Sheet API (Web App URL)
 function sendData(name1, name2, score) {
   fetch("https://script.google.com/macros/s/AKfycbzozip_OJkNez7DAIpEnlkzzXCL6hHUBj0FaPsaIS6PzQlcaYXmEle_b8gTACARE_-_BA/exec", {
     method: "POST",
