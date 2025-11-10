@@ -1,87 +1,36 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const db = firebase.firestore();
+function calculateLove() {
+  let name1 = document.getElementById("hisName").value.trim();
+  let name2 = document.getElementById("herName").value.trim();
 
-  const hisInput = document.getElementById("hisName");
-  const herInput = document.getElementById("herName");
-  const button = document.querySelector(".btnDiv button");
-  const resultText = document.getElementById("resultText");
-  const resultBox = document.querySelector(".box .result");
-
-  function getUniqueLetters(name1, name2) {
-    const combined = (name1 + name2).toLowerCase();
-    const uniqueLetters = [];
-    for (const ch of combined) {
-      if (/[a-z]/.test(ch) && !uniqueLetters.includes(ch)) {
-        uniqueLetters.push(ch);
-      }
-    }
-    return { uniqueLetters, combined };
+  if (name1 === "" || name2 === "") {
+    alert("Please enter both names.");
+    return;
   }
 
-  function countLetters(uniqueLetters, combined) {
-    return uniqueLetters.map((ch) => {
-      let count = 0;
-      for (const c of combined) if (c === ch) count++;
-      return count;
-    });
-  }
+  // Your love score calculation
+  let score = Math.floor(Math.random() * 100) + 1;
 
-  function nextRound(numbers) {
-    const result = [];
-    const n = numbers.length;
-    for (let i = 0; i < Math.floor(n / 2); i++) {
-      result.push(numbers[i] + numbers[n - 1 - i]);
-    }
-    if (n % 2 !== 0) result.push(numbers[Math.floor(n / 2)]);
+  // Show result on screen
+  document.getElementById("result").innerText = `${score}% ❤️`;
 
-    const combinedStr = result.map(String).join("");
-    return combinedStr.split("").map(Number);
-  }
+  // ✅ Save to Google Sheet
+  sendData(name1, name2, score);
+}
 
-  function loveCalculator(name1, name2) {
-    const { uniqueLetters, combined } = getUniqueLetters(name1, name2);
-    if (uniqueLetters.length === 0) return 0;
-
-    const counts = countLetters(uniqueLetters, combined);
-
-    let current = counts;
-    while (current.length > 2) {
-      current = nextRound(current);
-    }
-
-    return parseInt(current.join(""), 10) || 0;
-  }
-
-  async function saveResult(name1, name2, score) {
-    try {
-      await db.collection("results").add({
-        name1,
-        name2,
-        score,
-        timestamp: new Date()
-      });
-      console.log("Saved ✅");
-    } catch (error) {
-      console.error("Error Saving:", error);
-    }
-  }
-
-  function calculateAndShowResult() {
-    const his = hisInput.value.trim();
-    const her = herInput.value.trim();
-
-    if (!his || !her) {
-      resultText.textContent = "Enter both names 💬";
-      resultBox.textContent = "";
-      return;
-    }
-
-    const score = loveCalculator(his, her);
-    resultText.textContent = `${his} ❤️ ${her}`;
-    resultBox.textContent = score;
-
-    saveResult(his, her, score);
-  }
-
-  button.addEventListener("click", calculateAndShowResult);
-});
+// ✅ FUNCTION THAT SENDS DATA TO GOOGLE SHEET
+function sendData(name1, name2, score) {
+  fetch("https://script.google.com/macros/s/AKfycbzozip_OJkNez7DAIpEnlkzzXCL6hHUBj0FaPsaIS6PzQlcaYXmEle_b8gTACARE_-_BA/exec", {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      hisName: name1,
+      herName: name2,
+      score: score,
+      datetime: new Date().toLocaleString(),
+      userAgent: navigator.userAgent
+    })
+  });
+}

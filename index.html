@@ -31,7 +31,7 @@
 
 
     <div class="btnDiv">
-      <button>Enter</button>
+      <button onclick="calculateLove()">Enter</button>
     </div>
 
     <h2 id="resultText"></h2>
@@ -53,22 +53,10 @@
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-  <script>
-    // PASTE YOUR FIREBASE CONFIGURATION HERE
-    // Replace the placeholder values below with your actual Firebase project configuration.
-    // You can get this from your Firebase project settings.
-    const firebaseConfig = {
-      apiKey: "AIzaSy...YOUR_API_KEY", // Replace with your API Key
-      authDomain: "your-project-id.firebaseapp.com", // Replace with your Auth Domain
-      projectId: "your-project-id", // Replace with your Project ID
-      storageBucket: "your-project-id.appspot.com",
-      messagingSenderId: "1234567890",
-      appId: "1:1234567890:web:abcdef123456"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-  </script>
+  <input type="text" id="username" placeholder="Enter Name">
+  <input type="text" id="msg" placeholder="Message">
+  <button onclick="save()">Submit</button>
+
 </body>
 
 </html>
