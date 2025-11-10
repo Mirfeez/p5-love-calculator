@@ -1,21 +1,20 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbzozip_OJkNez7DAIpEnlkzzXCL6hHUBj0FaPsaIS6PzQlcaYXmEle_b8gTACARE_-_BA/exec";
-const LOGIN_PASSWORD = "loveadmin123"; // change to whatever you want
+const LOGIN_PASSWORD = "312fmmn"; // your password
 
 let resultsData = [];
 
-// ================= LOGIN =================
+// Login
 document.getElementById("loginBtn").onclick = () => {
-  const enteredPass = document.getElementById("adminPass").value;
-  if (enteredPass === LOGIN_PASSWORD) {
+  if (document.getElementById("adminPass").value === LOGIN_PASSWORD) {
     document.getElementById("loginScreen").style.display = "none";
     document.getElementById("adminContent").style.display = "block";
     loadResults();
   } else {
-    document.getElementById("errorMsg").innerText = "Incorrect Password";
+    document.getElementById("errorMsg").innerText = "❌ Wrong password";
   }
 };
 
-// ================= LOAD DATA =================
+// Load results
 async function loadResults() {
   const response = await fetch(API_URL);
   resultsData = await response.json();
@@ -23,82 +22,77 @@ async function loadResults() {
   drawCharts(resultsData);
 }
 
-function renderTable(data) {
+function renderTable(list) {
   const table = document.getElementById("resultsTable");
   table.innerHTML = "";
 
-  data.forEach(entry => {
-    const row = document.createElement("tr");
-
-    row.innerHTML = `
-      <td>${entry.datetime}</td>
-      <td>${entry.hisName}</td>
-      <td>${entry.herName}</td>
-      <td>${entry.score}</td>
-      <td><button onclick="deleteRow(${entry.row})">Delete</button></td>
+  list.forEach(entry => {
+    table.innerHTML += `
+      <tr>
+        <td>${entry.datetime}</td>
+        <td>${entry.hisName}</td>
+        <td>${entry.herName}</td>
+        <td>${entry.score}</td>
+        <td><button onclick="deleteRow(${entry.row})">Delete</button></td>
+      </tr>
     `;
-
-    table.appendChild(row);
   });
 }
 
-// ================= DELETE ROW =================
-async function deleteRow(rowNum) {
-  await fetch(`${API_URL}?row=${rowNum}`, { method: "DELETE" });
+// Delete a row
+async function deleteRow(row) {
+  await fetch(`${API_URL}?row=${row}`, { method: "DELETE" });
   loadResults();
 }
 
-// ================= CLEAR ALL =================
+// Clear all data
 document.getElementById("clearAll").onclick = async () => {
   await fetch(`${API_URL}?clear=true`, { method: "POST" });
   loadResults();
 };
 
-// ================= SEARCH =================
-document.querySelector(".search-box").addEventListener("input", e => {
-  const val = e.target.value.toLowerCase();
+// Search
+document.querySelector(".search-box").oninput = (e) => {
+  const search = e.target.value.toLowerCase();
   const filtered = resultsData.filter(r =>
-    r.hisName.toLowerCase().includes(val) ||
-    r.herName.toLowerCase().includes(val)
+    r.hisName.toLowerCase().includes(search) ||
+    r.herName.toLowerCase().includes(search)
   );
   renderTable(filtered);
-});
+};
 
-// ================= SORT =================
+// Sorting
 function sortByDate(order) {
-  resultsData.sort((a, b) => (order === "asc" ? new Date(a.datetime) - new Date(b.datetime) : new Date(b.datetime) - new Date(a.datetime)));
+  resultsData.sort((a, b) =>
+    order === "asc"
+      ? new Date(a.datetime) - new Date(b.datetime)
+      : new Date(b.datetime) - new Date(a.datetime)
+  );
   renderTable(resultsData);
 }
 
 function sortByScore(order) {
-  resultsData.sort((a, b) => (order === "asc" ? a.score - b.score : b.score - a.score));
+  resultsData.sort((a, b) =>
+    order === "asc" ? a.score - b.score : b.score - a.score
+  );
   renderTable(resultsData);
 }
 
-// ================= CHARTS =================
+// Charts
 function drawCharts(data) {
-  const ctx1 = document.getElementById("scoreTrendChart");
-  const ctx2 = document.getElementById("scoreFrequencyChart");
-
   const dates = data.map(d => d.datetime);
   const scores = data.map(d => Number(d.score));
 
-  new Chart(ctx1, {
+  new Chart(document.getElementById("scoreTrendChart"), {
     type: "line",
-    data: {
-      labels: dates,
-      datasets: [{ data: scores }]
-    }
+    data: { labels: dates, datasets: [{ data: scores }] }
   });
 
-  const count = {};
-  scores.forEach(s => count[s] = (count[s] || 0) + 1);
+  const frequency = {};
+  scores.forEach(s => frequency[s] = (frequency[s] || 0) + 1);
 
-  new Chart(ctx2, {
+  new Chart(document.getElementById("scoreFrequencyChart"), {
     type: "bar",
-    data: {
-      labels: Object.keys(count),
-      datasets: [{ data: Object.values(count) }]
-    }
+    data: { labels: Object.keys(frequency), datasets: [{ data: Object.values(frequency) }] }
   });
 }
