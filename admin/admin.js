@@ -9,7 +9,7 @@ firebase.auth().onAuthStateChanged((user) => {
 
 // Login Button
 document.getElementById("loginBtn").addEventListener("click", () => {
-  const email = "admin@loveapp.com"; // Use your admin email here
+  const email = "mahammadmirfeez@gmail.com"; // Use your admin email here
   const password = document.getElementById("adminPass").value;
 
   firebase.auth().signInWithEmailAndPassword(email, password)
