@@ -1,12 +1,10 @@
+const hisInput = document.getElementById("hisName");
+const herInput = document.getElementById("herName");
+const button = document.querySelector(".btnDiv button");
+const resultText = document.getElementById("resultText");
+const resultBox = document.querySelector(".box .result");
+
 document.addEventListener("DOMContentLoaded", () => {
-  const db = firebase.firestore();
-
-  const hisInput = document.getElementById("hisName");
-  const herInput = document.getElementById("herName");
-  const button = document.querySelector(".btnDiv button");
-  const resultText = document.getElementById("resultText");
-  const resultBox = document.querySelector(".box .result");
-
   function getUniqueLetters(name1, name2) {
     const combined = (name1 + name2).toLowerCase();
     const uniqueLetters = [];
@@ -45,23 +43,11 @@ document.addEventListener("DOMContentLoaded", () => {
     return parseInt(current.join(""), 10) || 0;
   }
 
-  async function saveResult(name1, name2, score) {
-    try {
-      await db.collection("results").add({
-        name1,
-        name2,
-        score,
-        timestamp: new Date()
-      });
-      console.log("Saved ✅");
-    } catch (error) {
-      console.error("Error Saving:", error);
-    }
-  }
-
   function calculateAndShowResult() {
-    const his = hisInput.value.trim();
-    const her = herInput.value.trim();
+    const his = hisInput.value;
+    const her = herInput.value;
+    const hisTrim = hisInput.value.trim();
+    const herTrim = herInput.value.trim();
     if (!his || !her) {
       resultText.textContent = "Enter both names 💬";
       resultBox.textContent = "";
@@ -74,12 +60,18 @@ document.addEventListener("DOMContentLoaded", () => {
     resultText.textContent = `${his} ❤️ ${her}`;
     resultBox.textContent = score;
 
-    saveResult(his, her, score);
+    // saveResult(his, her, score);
   }
 
   button.addEventListener("click", calculateAndShowResult);
 
   // Optional: allow pressing Enter
-  hisInput.addEventListener("keydown", (e) => e.key === "Enter" && calculateAndShowResult());
-  herInput.addEventListener("keydown", (e) => e.key === "Enter" && calculateAndShowResult());
+  hisInput.addEventListener(
+    "keydown",
+    (e) => e.key === "Enter" && calculateAndShowResult()
+  );
+  herInput.addEventListener(
+    "keydown",
+    (e) => e.key === "Enter" && calculateAndShowResult()
+  );
 });
