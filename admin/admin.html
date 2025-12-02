@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin — Love Calculator</title>
+  <link rel="stylesheet" href="admin.css">
+  <!-- Firebase compat SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <script src="/firebase-init.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Love Calculator Results</h1>
+    <input class="search-box" placeholder="Search by name...">
+    <div class="filters">
+      <button onclick="sortByDate('desc')">Latest First</button>
+      <button onclick="sortByDate('asc')">Oldest First</button>
+      <button onclick="sortByScore('desc')">Highest Score</button>
+      <button onclick="sortByScore('asc')">Lowest Score</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Date & Time</th>
+          <th>Name 1</th>
+          <th>Name 2</th>
+          <th>Score</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="resultsTable"></tbody>
+    </table>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

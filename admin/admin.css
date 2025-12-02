@@ -1,0 +1,142 @@
+/* Admin panel external CSS */
+body {
+  font-family: Arial, sans-serif;
+  margin: 10px;
+  background: #000;
+  color: #fff;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+h1 {
+  color: #ff0000;
+  text-align: center;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin: 1rem 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: rgba(255, 0, 0, 0.1);
+  font-size: clamp(14px, 2vw, 16px);
+}
+
+th,
+td {
+  padding: 12px 8px;
+  text-align: left;
+  border-bottom: 1px solid #ff0000;
+}
+
+th {
+  background-color: #ff0000;
+  color: white;
+  white-space: nowrap;
+}
+
+tr:hover {
+  background: rgba(255, 0, 0, 0.2);
+}
+
+.search-box {
+  width: 100%;
+  padding: 12px;
+  margin: 20px 0;
+  background: #1a1a1a;
+  border: 1px solid #ff0000;
+  color: white;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+  justify-content: center;
+}
+
+button {
+  background: #ff0000;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: clamp(14px, 2vw, 16px);
+  white-space: nowrap;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #cc0000;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 10px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  td,
+  th {
+    padding: 8px;
+  }
+
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filters button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    margin: 5px;
+  }
+
+  .search-box {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  td,
+  th {
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+.delete-btn {
+  background: #ff3333;
+  padding: 5px 10px;
+  font-size: 0.9em;
+  border-radius: 3px;
+}
+
+.delete-btn:hover {
+  background: #cc0000;
+}

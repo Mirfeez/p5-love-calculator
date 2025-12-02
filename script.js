@@ -46,17 +46,41 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function saveResult(his, her, score) {
-    const data = {
-      hisName: his,
-      herName: her,
-      score: score,
-      datetime: new Date().toLocaleString()
-    };
-    await fetch('http://localhost:5000/api/save', {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    });
+    // Prefer Firebase Realtime Database when available (online shared storage)
+    try {
+      if (window.database && typeof window.database.ref === 'function') {
+        // push to /love-calculator-results
+        await window.database.ref('love-calculator-results').push({
+          name1: his.trim(),
+          name2: her.trim(),
+          score: score,
+          timestamp: new Date().toISOString()
+        });
+        return;
+      }
+    } catch (err) {
+      console.warn('Firebase write failed, falling back to local POST if available:', err);
+    }
+
+    // Fallback: attempt to send to local server (if you have one)
+    try {
+      const data = {
+        hisName: his,
+        herName: her,
+        score: score,
+        datetime: new Date().toLocaleString()
+      };
+      await fetch('http://localhost:5000/api/save', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+    } catch (err) {
+      // As a last resort, store locally so admin can still view on this device
+      const results = JSON.parse(localStorage.getItem('loveCalculatorResults') || '[]');
+      results.push({ name1: his.trim(), name2: her.trim(), score, timestamp: new Date().toISOString() });
+      localStorage.setItem('loveCalculatorResults', JSON.stringify(results));
+    }
   }
 
 
