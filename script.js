@@ -1,5 +1,3 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbzozip_OJkNez7DAIpEnlkzzXCL6hHUBj0FaPsaIS6PzQlcaYXmEle_b8gTACARE_-_BA/exec";
-
 const hisInput = document.getElementById("hisName");
 const herInput = document.getElementById("herName");
 const button = document.querySelector(".btnDiv button");
@@ -46,10 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function saveResult(his, her, score) {
-    // Prefer Firebase Realtime Database when available (online shared storage)
     try {
       if (window.database && typeof window.database.ref === 'function') {
-        // push to /love-calculator-results
         await window.database.ref('love-calculator-results').push({
           name1: his.trim(),
           name2: her.trim(),
@@ -59,37 +55,18 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
     } catch (err) {
-      console.warn('Firebase write failed, falling back to local POST if available:', err);
+      console.warn('Firebase write failed:', err);
     }
 
-    // Fallback: attempt to send to local server (if you have one)
-    try {
-      const data = {
-        hisName: his,
-        herName: her,
-        score: score,
-        datetime: new Date().toLocaleString()
-      };
-      await fetch('http://localhost:5000/api/save', {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      });
-    } catch (err) {
-      // As a last resort, store locally so admin can still view on this device
-      const results = JSON.parse(localStorage.getItem('loveCalculatorResults') || '[]');
-      results.push({ name1: his.trim(), name2: her.trim(), score, timestamp: new Date().toISOString() });
-      localStorage.setItem('loveCalculatorResults', JSON.stringify(results));
-    }
+    // Fallback: store locally
+    const results = JSON.parse(localStorage.getItem('loveCalculatorResults') || '[]');
+    results.push({ name1: his.trim(), name2: her.trim(), score, timestamp: new Date().toISOString() });
+    localStorage.setItem('loveCalculatorResults', JSON.stringify(results));
   }
-
-
 
   function calculateAndShowResult() {
     const his = hisInput.value;
     const her = herInput.value;
-    const hisTrim = hisInput.value.trim();
-    const herTrim = herInput.value.trim();
     if (!his || !her) {
       resultText.textContent = "Enter both names 💬";
       resultBox.textContent = "";
@@ -97,8 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const score = loveCalculator(his, her);
-
-    // ✅ FIXED LINE — NOW WORKS
     resultText.textContent = `${his} ❤️ ${her}`;
     resultBox.textContent = score;
 
@@ -107,15 +82,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   button.addEventListener("click", calculateAndShowResult);
 
-  // Optional: allow pressing Enter
-  hisInput.addEventListener(
-    "keydown",
-    (e) => e.key === "Enter" && calculateAndShowResult()
-  );
-  herInput.addEventListener(
-    "keydown",
-    (e) => e.key === "Enter" && calculateAndShowResult()
-  );
+  hisInput.addEventListener("keydown", (e) => e.key === "Enter" && calculateAndShowResult());
+  herInput.addEventListener("keydown", (e) => e.key === "Enter" && calculateAndShowResult());
 });
 
 
