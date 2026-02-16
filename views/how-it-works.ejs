@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>How It Works - Love Calculator</title>
+   <link rel="stylesheet" href="stylesheets/style.css">
+</head>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+<body>
+
+   <!-- Header -->
+   <header>
+      <nav>
+         <a href="https://mirfeez.github.io/Mirfeez-portfolio" target="_blank" rel="noopener">Menzi</a>
+      </nav>
+
+      <a href="/">
+         <button class="header-btn">Back to Calculator</button>
+      </a>
+   </header>
+
+   <!-- Main Section -->
+   <div style="margin-top: 3rem;">
+
+      <h1 class=" border-x-3 py-2 border-red-500 rounded text-red-500 mt-4 text-center mb-3 bg-[#221818]">
+         💖 How The Love Calculator Works
+      </h1>
+
+      <p class="description">
+         This calculator does <span class="text-red-500">NOT</span> generate random results.
+         It uses a character-based compatibility algorithm.
+      </p>
+
+      <div style="margin-top:2rem; line-height:1.9; font-size:1.05rem;">
+         <div class="border border-zinc-500 rounded-lg mb-11">
+
+            <h3 class="text-red-500 text-2xl m-4">Step 1: Combine Both Names</h3>
+            <p class="text-center m-4">
+               The two names are joined together and converted to lowercase.
+               <br> Example: <strong>Romeo & Juliet → romeojuliet</strong>
+            </p>
+         </div>
+
+         <div class="border border-zinc-500 rounded-lg mb-11">
+            <h3 class="text-red-500 text-2xl m-4">Step 2: Extract Unique Letters</h3>
+            <p class="text-center m-4">
+               Only unique alphabetical characters are kept.
+               Duplicate letters are ignored.
+            </p>
+         </div>
+
+         <div class="border border-zinc-500 rounded-lg mb-11">
+            <h3 class="text-red-500 text-2xl m-4">Step 3: Count Letter Frequency</h3>
+            <p class="text-center m-4">
+               Each unique letter is counted based on how many times it
+               appears in the combined name.
+            </p>
+         </div>
+
+         <div class="border border-zinc-500 rounded-lg mb-11">
+            <h3 class="text-red-500 text-2xl m-4">Step 4: Pair & Reduce</h3>
+            <p class="text-center m-4">
+               The first and last numbers are added together repeatedly.
+               This process continues until only two digits remain.
+            </p>
+         </div>
+
+         <div class="border border-zinc-500 rounded-lg mb-11">
+            <h3 class="text-red-500 text-2xl m-4">Step 5: Generate Final Score</h3>
+            <p class="text-center m-4">
+               The final two-digit number becomes the compatibility percentage.
+               The same names will always produce the same result.
+            </p>
+         </div>
+
+      </div>
+
+      <div style="margin-top:2.5rem; text-align:center;">
+         <p class="quote" style="background: #221818;">
+            “Love may be <span class="font-bold text-lg text-red-500">emotional</span>, but here it’s calculated <span
+               class="font-bold text-lg text-red-500">mathematically.</span>😁”
+         </p>
+      </div>
+
+      <p class="disclaimer" style="margin-top:2rem;">
+         ⚠ This calculator is built for fun and entertainment purposes only.
+      </p>
+
+   </div>
+
+
+</body>
+
+</html>

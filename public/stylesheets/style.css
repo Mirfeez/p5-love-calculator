@@ -16,20 +16,58 @@ body {
    box-sizing: border-box;
 }
 
+/* ===== HEADER STYLING ===== */
+
 header {
-   margin: 1rem;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 1rem;
+   box-shadow: 0 4px 20px rgba(255, 0, 0, 0.15);
+   position: sticky;
+   top: 0;
+   z-index: 50;
+   background-color: transparent;
+   backdrop-filter: blur(12px);
 }
 
 nav a {
+   font-size: 1.8rem;
+   font-weight: bold;
+   letter-spacing: 1px;
    color: white;
-   text-decoration-line: none;
-   font-size: 2rem;
+   text-decoration: none;
+   transition: all 0.3s ease;
 }
 
 nav a:hover {
-   color: red;
+   color: #ff0000;
    text-shadow: 0 0 15px red;
-   transition: all 1s ease;
+   transform: scale(1.05);
+}
+
+/* How It Works Button */
+.header-btn {
+   background: transparent;
+   border: 2px solid rgba(255, 0, 0, 0.8);
+   color: white;
+   padding: 0.6rem 1.5rem;
+   border-radius: 999px;
+   font-size: 1rem;
+   font-weight: 600;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   position: relative;
+   overflow: hidden;
+}
+
+.header-btn:hover {
+   background: linear-gradient(45deg,
+         rgba(255, 0, 0, 0.95),
+         rgba(200, 0, 0, 0.95));
+   color: black;
+   box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
+   transform: translateY(-2px);
 }
 
 section {

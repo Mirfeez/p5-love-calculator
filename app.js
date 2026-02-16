@@ -69,6 +69,10 @@ app.delete("/delete-result/:id", async (req, res) => {
 	}
 });
 
+app.get("/how-it-works", (req, res) => {
+	res.render("how-it-works");
+});
+
 
 app.listen(process.env.PORT, () => {
 	console.log('server is running,', process.env.PORT)
