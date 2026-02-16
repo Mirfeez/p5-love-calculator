@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -5,7 +6,7 @@ const Love = require("./models/Love");
 const mongoose = require("mongoose");
 
 mongoose
-	.connect("mongodb://127.0.0.1:27017/loveDB")
+	.connect(process.env.MONGO_URL)
 	.then(() => console.log("MongoDB Connected"))
 	.catch((err) => console.log(err));
 
@@ -24,7 +25,7 @@ app.get("/admin", (req, res) => {
 });
 
 app.post("/admin-login", (req, res) => {
-	if (req.body.password === "mirfeez") {
+	if (req.body.password === process.env.ADMIN_PASSWORD) {
 		res.json({ success: true });
 	} else {
 		res.json({ success: false });
@@ -69,4 +70,6 @@ app.delete("/delete-result/:id", async (req, res) => {
 });
 
 
-app.listen(3000);
+app.listen(process.env.PORT, () => {
+	console.log('server is running,', process.env.PORT)
+});
