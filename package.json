@@ -1,0 +1,26 @@
+{
+  "name": "p5-love-calculator",
+  "version": "1.0.0",
+  "description": "A Love Calculator",
+  "homepage": "https://github.com/Mirfeez/p5-love-calculator#readme",
+  "bugs": {
+    "url": "https://github.com/Mirfeez/p5-love-calculator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mirfeez/p5-love-calculator.git"
+  },
+  "license": "ISC",
+  "author": "Mirfeez",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ejs": "^4.0.1",
+    "express": "^5.2.1",
+    "mongoose": "^9.2.1",
+    "nodemon": "^3.1.11"
+  }
+}
