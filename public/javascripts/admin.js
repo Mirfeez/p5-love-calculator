@@ -1,4 +1,4 @@
-const ADMIN_PASSWORD = "mirfeez";
+const ADMIN_PASSWORD = "312fmmn312fmmn";
 
 function checkPassword() {
 	const password = document.getElementById("adminPassword").value;
