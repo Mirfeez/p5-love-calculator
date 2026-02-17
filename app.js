@@ -4,7 +4,7 @@ const app = express();
 const path = require("path");
 const Love = require("./models/Love");
 const mongoose = require("mongoose");
-
+const port = process.env.PORT || 3000;
 mongoose
 	.connect(process.env.MONGO_URL)
 	.then(() => console.log("MongoDB Connected"))
@@ -74,6 +74,6 @@ app.get("/how-it-works", (req, res) => {
 });
 
 
-app.listen(process.env.PORT, () => {
+app.listen(port, () => {
 	console.log('server is running,', process.env.PORT)
 });
