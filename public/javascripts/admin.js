@@ -57,7 +57,8 @@ function addRow(id, dateTime, him, her, score) {
 }
 
 function deleteResult(id) {
-	if (!confirm("Are you sure you want to delete this record?")) return;
+	if (!confirm(`Are you sure you want to delete this record of row-${id}`))
+		return;
 
 	fetch(`/delete-result/${id}`, {
 		method: "DELETE",
