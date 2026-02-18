@@ -5,8 +5,8 @@ const path = require("path");
 const Love = require("./models/Love");
 const mongoose = require("mongoose");
 const port = process.env.PORT || 3000;
-mongoose
-	.connect(process.env.MONGO_URL)
+
+mongoose.connect(process.env.MONGO_URL)
 	.then(() => console.log("MongoDB Connected"))
 	.catch((err) => console.log(err));
 
@@ -15,6 +15,7 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+
 
 app.get("/", (req, res) => {
 	res.render("index");
@@ -36,19 +37,25 @@ app.post("/save-result", async (req, res) => {
 	try {
 		const { him, her, score } = req.body;
 
+		if (!him || !her || !score) {
+			return res.status(400).json({ message: "All fields required" });
+		}
+
 		const newResult = new Love({
-			him,
-			her,
-			score,
+			hisName:him,
+			herName:her,
+			sore:score,
 		});
 
 		await newResult.save();
 
-		res.json({ message: "Saved successfully" });
+		res.json({ success: true });
 	} catch (error) {
+		console.error("Save error:", error);
 		res.status(500).json({ message: "Error saving" });
 	}
 });
+
 
 app.get("/admin-data", async (req, res) => {
 	try {
@@ -73,7 +80,10 @@ app.get("/how-it-works", (req, res) => {
 	res.render("how-it-works");
 });
 
+app.use((req, res) => {
+	res.status(404).render("404");
+});
 
 app.listen(port, () => {
-	console.log('server is running,', process.env.PORT)
+	console.log(`server is running, ${port}`)
 });

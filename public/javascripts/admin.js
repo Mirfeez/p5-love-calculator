@@ -1,5 +1,3 @@
-const ADMIN_PASSWORD = "312fmmn312fmmn";
-
 function checkPassword() {
 	const password = document.getElementById("adminPassword").value;
 
@@ -79,9 +77,9 @@ fetch("/admin-data")
 		data.forEach((item) => {
 			addRow(
 				item._id,
-				new Date(item.date).toLocaleString(),
-				item.him,
-				item.her,
+				new Date(item.createdAt).toLocaleString(),
+				item.hisName,
+				item.herName,
 				item.score,
 			);
 		});

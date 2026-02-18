@@ -1,8 +1,3 @@
-const hisInput = document.getElementById("hisName");
-const herInput = document.getElementById("herName");
-const button = document.querySelector(".btnDiv button");
-const resultText = document.getElementById("resultText");
-const resultBox = document.querySelector(".box .result");
 
 document.addEventListener("DOMContentLoaded", () => {
 	const hisInput = document.getElementById("hisName");
