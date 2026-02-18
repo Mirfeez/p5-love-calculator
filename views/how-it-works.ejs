@@ -9,91 +9,130 @@
 </head>
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-<body>
+<body class="bg-black text-white">
 
    <!-- Header -->
-   <header>
+   <header class="flex flex-col sm:flex-row justify-between items-center px-4 sm:px-8 py-4 gap-4">
       <nav>
-         <a href="https://mirfeez.github.io/Mirfeez-portfolio" target="_blank" rel="noopener">Menzi</a>
+         <a href="https://mirfeez.github.io/Mirfeez-portfolio" target="_blank" rel="noopener"
+            class="text-red-500 font-semibold text-lg">
+            Menzi
+         </a>
       </nav>
 
       <a href="/">
-         <button class="header-btn">Back to Calculator</button>
+         <button class="border border-red-500 px-4 py-2 rounded hover:bg-red-600 transition">
+            Back to Calculator
+         </button>
       </a>
    </header>
 
    <!-- Main Section -->
-   <div style="margin-top: 3rem;">
+   <main class="max-w-5xl mx-auto px-2 sm:px-6 lg:px-2 py-10">
 
-      <h1 class=" border-x-3 py-2 border-red-500 rounded text-red-500 mt-4 text-center mb-3 bg-[#221818]">
+      <h1
+         class="border-x-4 border-red-500 rounded py-3 text-red-500 text-center text-2xl sm:text-3xl lg:text-4xl mb-6 bg-[#221818] w-full">
          💖 How The Love Calculator Works
       </h1>
 
-      <p class="description">
-         This calculator does <span class="text-red-500">NOT</span> generate random results.
+      <p class="text-center text-base sm:text-lg mb-10">
+         This calculator does <span class="text-red-500 font-semibold">NOT</span> generate random results.
          It uses a character-based compatibility algorithm.
       </p>
 
-      <div style="margin-top:2rem; line-height:1.9; font-size:1.05rem;">
-         <div class="border border-zinc-500 rounded-lg mb-11">
+      <div class="space-y-12">
 
-            <h3 class="text-red-500 text-2xl m-4">Step 1: Combine Both Names</h3>
-            <div>
-               <img src="/images/img1.png" alt="step 1" class="mx-auto rounded-lg">
+         <!-- STEP CARD TEMPLATE -->
+         <!-- Repeat structure for each step -->
+
+         <div class="border border-zinc-600 rounded-xl overflow-hidden">
+            <h3 class="text-red-500 text-xl sm:text-2xl p-4">
+               Step 1: Combine Both Names
+            </h3>
+
+            <div class="relative">
+               <img src="/images/1.jpeg" alt="step 1" class="w-full h-auto object-cover">
+               <div class="absolute inset-0 shadow-[inset_0_20px_80px_rgba(0,0,0,0.8)]"></div>
             </div>
-            <p class="text-center m-4">
+
+            <p class="text-center p-4 text-sm sm:text-base">
                The two names are joined together and converted to lowercase.
                <br> Example: <strong>Romeo + Juliet → romeojuliet</strong>
             </p>
          </div>
 
-         <div class="border border-zinc-500 rounded-lg mb-11">
-            <h3 class="text-red-500 text-2xl m-4">Step 2: Extract Unique Letters</h3>
-            <p class="text-center m-4">
+         <!-- Repeat for other steps -->
+
+         <div class="border border-zinc-600 rounded-xl overflow-hidden">
+            <h3 class="text-red-500 text-xl sm:text-2xl p-4">
+               Step 2: Extract Unique Letters
+            </h3>
+
+            <div class="relative">
+               <img src="/images/2.jpeg" alt="step 2" class="w-full h-auto object-cover">
+               <div class="absolute inset-0 shadow-[inset_0_20px_80px_rgba(0,0,0,0.8)] "></div>
+            </div>
+
+            <p class="text-center p-4 text-sm sm:text-base">
                Only unique alphabetical characters are kept.
                Duplicate letters are ignored.
             </p>
          </div>
 
-         <div class="border border-zinc-500 rounded-lg mb-11">
-            <h3 class="text-red-500 text-2xl m-4">Step 3: Count Letter Frequency</h3>
-            <p class="text-center m-4">
+         <div class="border border-zinc-600 rounded-xl overflow-hidden">
+            <h3 class="text-red-500 text-xl sm:text-2xl p-4">Step 3: Count Letter Frequency</h3>
+            <div class="relative">
+               <img src="/images/3.jpeg" alt="step 3" class=" w-full h-auto object-cover">
+               <div class="absolute inset-0 shadow-[inset_0_20px_80px_rgba(0,0,0,0.8)] "></div>
+
+            </div>
+            <p class="text-center p-4 text-sm sm:text-base">
                Each unique letter is counted based on how many times it
                appears in the combined name.
             </p>
          </div>
 
-         <div class="border border-zinc-500 rounded-lg mb-11">
-            <h3 class="text-red-500 text-2xl m-4">Step 4: Pair & Reduce</h3>
-            <p class="text-center m-4">
+         <div class="border border-zinc-600 rounded-xl overflow-hidden">
+            <h3 class="text-red-500 text-xl sm:text-2xl p-4">Step 4: Pair & Reduce</h3>
+            <div class="relative">
+               <img src="/images/4.jpeg" alt="step 4" class=" w-full h-auto object-cover">
+               <div class="absolute inset-0 shadow-[inset_0_20px_80px_rgba(0,0,0,0.8)] "></div>
+
+            </div>
+            <p class="text-center p-4 text-sm sm:text-base">
                The first and last numbers are added together repeatedly.
                This process continues until only two digits remain.
             </p>
          </div>
 
-         <div class="border border-zinc-500 rounded-lg mb-11">
-            <h3 class="text-red-500 text-2xl m-4">Step 5: Generate Final Score</h3>
-            <p class="text-center m-4">
+         <div class="border border-zinc-600 rounded-xl overflow-hidden">
+            <h3 class="text-red-500 text-xl sm:text-2xl p-4">Step 5: Generate Final Score</h3>
+            <div class="relative">
+               <img src="/images/5.jpeg" alt="step 5" class=" w-full h-auto object-cover">
+               <div class="absolute inset-0 shadow-[inset_0_20px_80px_rgba(0,0,0,0.8)] "></div>
+
+            </div>
+            <p class="text-center p-4 text-sm sm:text-base">
                The final two-digit number becomes the compatibility percentage.
-               The same names will always produce the same result.
+               The same names will always produce the same result. <strong class="text-red-300">As 56%</strong>
             </p>
          </div>
 
       </div>
 
-      <div style="margin-top:2.5rem; text-align:center;">
-         <p class="quote" style="background: #221818;">
-            “Love may be <span class="font-bold text-lg text-red-500">emotional</span>, but here it’s calculated <span
-               class="font-bold text-lg text-red-500">mathematically.</span>😁”
+      <div class="mt-16 text-center">
+         <p class="bg-[#221818] p-6 rounded-xl text-sm sm:text-lg">
+            “Love may be <span class="font-bold text-red-500">emotional</span>,
+            but here it’s calculated
+            <span class="font-bold text-red-500">mathematically.</span> 😁”
          </p>
       </div>
 
-      <p class="disclaimer" style="margin-top:2rem;">
+      <p class="mt-10 text-center text-xs sm:text-sm text-red-200">
          ⚠ This calculator is built for fun and entertainment purposes only.
       </p>
 
-   </div>
-
+   </main>
 
 </body>
 
