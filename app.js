@@ -44,7 +44,7 @@ app.post("/save-result", async (req, res) => {
 		const newResult = new Love({
 			hisName:him,
 			herName:her,
-			sore:score,
+			score:score,
 		});
 
 		await newResult.save();
